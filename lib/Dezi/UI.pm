@@ -5,6 +5,7 @@ use strict;
 use base qw( Plack::Middleware );
 use Carp;
 use Plack::Request;
+use Plack::Util::Accessor qw( search_path );
 use Data::Dump qw( dump );
 
 our $VERSION = '0.001000';
@@ -23,7 +24,7 @@ sub default_page {
  <!-- based on http://www.extjs.com/deploy/dev/examples/form/custom.html -->
  <head>
   <title>Dezi UI</title>
-  
+  <script type="text/javascript">var DEZI_SEARCH_URI = 'REPLACE_ME';</script>
   <script type="text/javascript"
           src="http://extjs.cachefly.net/ext-3.2.0/adapter/ext/ext-base.js"></script>
   <script type="text/javascript"
@@ -58,14 +59,20 @@ sub call {
     my $path = $req->path;
     my $resp = $req->new_response;
     if ( $req->method eq 'GET' ) {
+        $resp->status(200);
         $resp->content_type('text/html');
-        $resp->body( $self->default_page );
+        my $body = $self->default_page;
+        my $uri  = $req->base;
+        $uri =~ s,/ui,,;    # TODO uri mangling is ugly
+        my $search_uri = $uri . $self->search_path;
+        $body =~ s,REPLACE_ME,$search_uri,;
+        $resp->body($body);
     }
     else {
         $resp->status(400);
         $resp->body('GET only allowed');
     }
-    return $resp;
+    return $resp->finalize;
 }
 
 1;
