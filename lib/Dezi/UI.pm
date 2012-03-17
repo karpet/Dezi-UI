@@ -16,6 +16,20 @@ Dezi::UI - HTML interface to a Dezi server
 
 =head1 SYNOPSIS
 
+ % dezi --ui_class=Dezi::UI
+
+=head1 DESCRIPTION
+
+Dezi::UI is an example HTML interface for exploring a Dezi server.
+Dezi::UI isa Plack::Middleware.
+
+=head1 METHODS
+
+=head2 default_page
+
+Returns the HTML string suitable for the main UI. It uses
+the ExtJS-based examples from dezi.org.
+
 =cut
 
 sub default_page {
@@ -52,6 +66,13 @@ sub default_page {
 EOF
 
 }
+
+=head2 call( I<env> )
+
+Implements the required Middleware method. GET requests
+are the only allowed interface.
+
+=cut
 
 sub call {
     my ( $self, $env ) = @_;
