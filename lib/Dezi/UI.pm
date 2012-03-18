@@ -16,7 +16,7 @@ Dezi::UI - HTML interface to a Dezi server
 
 =head1 SYNOPSIS
 
- % dezi --ui_class=Dezi::UI
+ % dezi --ui-class=Dezi::UI
 
 =head1 DESCRIPTION
 
