@@ -3,4 +3,5 @@ Revision history for Dezi-UI
 0.001000    16 March 2012
         First version, released on an unsuspecting world.
 
-
+0.001001    22 May 2012
+        * fix POD synopsis
