@@ -8,7 +8,7 @@ use Plack::Request;
 use Plack::Util::Accessor qw( search_path );
 use Data::Dump qw( dump );
 
-our $VERSION = '0.001001';
+our $VERSION = '0.001002';
 
 =head1 NAME
 
@@ -28,40 +28,22 @@ Dezi::UI isa Plack::Middleware.
 =head2 default_page
 
 Returns the HTML string suitable for the main UI. It uses
-the ExtJS-based examples from dezi.org.
+the jQuery-based examples from dezi.org.
 
 =cut
 
 sub default_page {
     return <<EOF;
 <html>
- <!-- based on http://www.extjs.com/deploy/dev/examples/form/custom.html -->
  <head>
   <title>Dezi UI</title>
+  <link rel="stylesheet" type="text/css" href="http://dezi.org/ui/example/dezi-ui.css" />
   <script type="text/javascript">var DEZI_SEARCH_URI = 'REPLACE_ME';</script>
-  <script type="text/javascript"
-          src="http://extjs.cachefly.net/ext-3.2.0/adapter/ext/ext-base.js"></script>
-  <script type="text/javascript"
-          src="http://extjs.cachefly.net/ext-3.2.0/ext-all.js"></script>
-  <script type="text/javascript" 
-          src="http://dezi.org/ui/example/ext-searchfield.js"></script>
-  <script type="text/javascript"
-          src="http://dezi.org/ui/example/ext-livegrid.js"></script>
-  <script type="text/javascript"
-          src="http://dezi.org/ui/livegrid/build/livegrid-all.js"></script>
-  <link type="text/css" rel="stylesheet" 
-        href="http://extjs.cachefly.net/ext-3.2.0/resources/css/ext-all.css" />         
-  <link rel="stylesheet" type="text/css" 
-        href="http://extjs.cachefly.net/ext-3.2.0/examples/form/combos.css" />
-  <link rel="stylesheet" type="text/css" 
-        href="http://extjs.cachefly.net/ext-3.2.0/examples/shared/examples.css" />
-  <link rel="stylesheet" type="text/css" href="http://dezi.org/ui/example/ext-search.css" />
-  <link rel="stylesheet" type="text/css" href="http://dezi.org/ui/livegrid/build/resources/css/ext-ux-livegrid.css" />
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+  <script src="//dezi.org/ui/example/jquery.ba-bbq.js" type='text/javascript'></script>
+  <script src="//dezi.org/ui/example/dezi-ui-jquery.js" type='text/javascript'></script>
  </head>
- <body>
- <script type="text/javascript" src="http://extjs.cachefly.net/ext-3.2.0/examples/shared/examples.js"></script>
- <div style="width:700px;" id="search-panel"></div>
- </body>
+ <body></body>
 </html>
 EOF
 
@@ -86,7 +68,7 @@ sub call {
         my $uri  = $req->base;
         $uri =~ s,/ui,,;    # TODO uri mangling is ugly
         my $search_uri = $uri . $self->search_path;
-        $body =~ s,REPLACE_ME,$search_uri,;
+        $body =~ s,REPLACE_ME,$search_uri,g;
         $resp->body($body);
     }
     else {
