@@ -5,7 +5,7 @@ use strict;
 use base qw( Plack::Middleware );
 use Carp;
 use Plack::Request;
-use Plack::Util::Accessor qw( search_path );
+use Plack::Util::Accessor qw( base_uri search_path );
 use Data::Dump qw( dump );
 
 our $VERSION = '0.001002';
@@ -65,9 +65,15 @@ sub call {
         $resp->status(200);
         $resp->content_type('text/html');
         my $body = $self->default_page;
-        my $uri  = $req->base;
-        $uri =~ s,/ui,,;    # TODO uri mangling is ugly
-        my $search_uri = $uri . $self->search_path;
+        my $search_uri;
+        if ($self->base_uri) {
+            $search_uri  = $self->base_uri . $self->search_path;
+        }
+        else {
+            my $uri = $req->base;
+            $uri =~ s,/ui,,; 
+            $search_uri = $uri . $self->search_path;
+        }
         $body =~ s,REPLACE_ME,$search_uri,g;
         $resp->body($body);
     }
