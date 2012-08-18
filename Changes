@@ -9,5 +9,5 @@ Revision history for Dezi-UI
 0.001002    12 July 2012
         * switch to lightweight jQuery example
 
-0.001003    xxx
+0.001003    17 Aug 2012
         * add 'base_uri' arg to constructor
