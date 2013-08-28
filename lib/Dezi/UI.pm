@@ -8,7 +8,7 @@ use Plack::Request;
 use Plack::Util::Accessor qw( base_uri search_path );
 use Data::Dump qw( dump );
 
-our $VERSION = '0.001003';
+our $VERSION = '0.001004';
 
 =head1 NAME
 
