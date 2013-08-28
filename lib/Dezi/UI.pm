@@ -37,7 +37,7 @@ sub default_page {
 <html>
  <head>
   <title>Dezi UI</title>
-  <link rel="stylesheet" type="text/css" href="http://dezi.org/ui/example/dezi-ui.css" />
+  <link rel="stylesheet" type="text/css" href="//dezi.org/ui/example/dezi-ui.css" />
   <script type="text/javascript">var DEZI_SEARCH_URI = 'REPLACE_ME';</script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
   <script src="//dezi.org/ui/example/jquery.ba-bbq.js" type='text/javascript'></script>
