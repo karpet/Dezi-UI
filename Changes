@@ -12,5 +12,5 @@ Revision history for Dezi-UI
 0.001003    17 Aug 2012
         * add 'base_uri' arg to constructor
 
-0.001004    xxx
+0.001004    27 April 2015
         * fix css link protocol so it works under secure browsers
