@@ -1,5 +1,8 @@
 Revision history for Dezi-UI
 
+0.001005 05 Nov 2015
+ - fix packaging error https://rt.cpan.org/Ticket/Display.html?id=108442
+
 0.001004 27 April 2015
  - fix css link protocol so it works under secure browsers
 
